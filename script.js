@@ -98,101 +98,6 @@ function searchForFilms(query, data) {
             let i = 0;
             data.forEach(film => {
                 let category1 = "Brak";
-                let category2 = "Brak";
-                if (film.categories.length < 2) {
-                    category1 = film.categories[0].name;
-                } else {
-                    category1 = film.categories[0].name;
-                    category2 = film.categories[1].name;
-                }
-
-                let filmContainer = document.createElement("div");
-                filmContainer.classList.add("film-container");
-                
-                let filmBlock = document.createElement("div");
-                filmBlock.classList.add(i % 2 != 0 ? "EvenMovies" : "OddMovies");
-                filmBlock.style.display = "flex";
-                filmBlock.style.flexDirection = "row";
-                filmBlock.style.gap = "20px";
-
-                let filmRating = document.createElement("div");
-                filmRating.classList.add("oceny");
-                filmRating.innerHTML = `
-                        <h6 class="text-center">Oceń film</h6>
-                        <form action="" method="post">
-                        <div class="rating" id="rating-${film.id}">
-                            <input type="radio" id="star1-${film.id}" name="rating-${film.id}" value="1">
-                            <label for="star1-${film.id}"><i class="bi bi-star-fill"></i></label>
-
-                            <input type="radio" id="star2-${film.id}" name="rating-${film.id}" value="2">
-                            <label for="star2-${film.id}"><i class="bi bi-star-fill"></i></label>
-
-                            <input type="radio" id="star3-${film.id}" name="rating-${film.id}" value="3">
-                            <label for="star3-${film.id}"><i class="bi bi-star-fill"></i></label>
-
-                            <input type="radio" id="star4-${film.id}" name="rating-${film.id}" value="4">
-                            <label for="star4-${film.id}"><i class="bi bi-star-fill"></i></label>
-
-                            <input type="radio" id="star5-${film.id}" name="rating-${film.id}" value="5">
-                            <label for="star5-${film.id}"><i class="bi bi-star-fill"></i></label>
-                        </div>
-                            <button type="submit" class="btn btn-primary mt-2">Oceń</button>
-                        </form>
-                        <hr />
-                `
-                
-                let filmImage = `<img class="MoviePhotos" src="" alt="">`;
-                let filmInfo = `
-                    <h3 class="film-title">${film.title}</h3>
-                    ${filmImage}
-                    <h4 class="prodYear">Rok produkcji: ${film.prodYear}</h4>
-                    <p class="categories">${category1}</p>
-                    <p class="categories">${category2}</p>
-                `;
-                let filmDesc = `
-                    <button class="MovieControls"><i class="bi bi-trash-fill"></i></button>
-                    <button class="MovieControls"><i class="bi bi-pencil-fill"></i></button>   
-                    <h5 class="film-desc-title">Opis filmu:</h5>
-                    <p class="film-desc">${film.description}</p>
-                    <p class ="ratings">Oceny użytkowników: <br>
-                    ${film.rating}/5</p>
-                    <p class ="ratingsNum">Liczba ocen: ${film.ratingsNumber}</p>
-                    <p class ="awards">Nagrody: ${film.awards}</p>
-                `;
-                
-                let filmLeft = document.createElement("div");
-                filmLeft.classList.add("film-left");
-                filmLeft.innerHTML = filmInfo;
-
-                let filmRight = document.createElement("div");
-                filmRight.classList.add("film-right");
-                filmRight.innerHTML = filmDesc;
-                
-                filmBlock.appendChild(filmLeft);
-                filmBlock.appendChild(filmRight);
-                filmContainer.appendChild(filmBlock);
-                main.appendChild(filmContainer);
-                main.appendChild(filmRating);
-                i++;
-    });
-        } 
-    
-});
-    }
-}
-function sortCategory(data) {
-    let main = document.getElementById("main");
-    main.innerHTML = "";
-    if (data.length == 0) {
-        let noResult = document.createElement("div");
-        noResult.innerHTML = "<h3>Brak wyników z tej kategorii</h3>"
-        main.appendChild(noResult);
-    }
-    else {
-        let i = 0;
-    data.forEach(film => {
-
-        let category1 = "Brak";
         let category2 = "Brak";
         if (film.categories.length < 2) {
             category1 = film.categories[0].name;
@@ -200,12 +105,26 @@ function sortCategory(data) {
             category1 = film.categories[0].name;
             category2 = film.categories[1].name;
         }
-        
+        let ratingf = "Brak";
+        if (film.rating != null) {
+            ratingf = film.rating + '/5';
+        }
+        let ratingnum = "Brak";
+        if (film.ratingsNumber != null) {
+            ratingnum = film.ratingsNumber;
+        }
+        let imdbr = "Brak";
+        if (film.imdbrating != null) {
+            imdbr = film.imdbrating;
+        }
+
+
         let filmContainer = document.createElement("div");
         filmContainer.classList.add("film-container");
         
+        
         let filmBlock = document.createElement("div");
-        filmBlock.classList.add(i % 2 != 0 ? "EvenMovies" : "OddMovies");
+        filmBlock.classList.add("OddMovies");
         filmBlock.style.display = "flex";
         filmBlock.style.flexDirection = "row";
         filmBlock.style.gap = "20px";
@@ -239,7 +158,7 @@ function sortCategory(data) {
         let filmImage = `<img class="MoviePhotos" src="" alt="">`;
         let filmInfo = `
             <h3 class="film-title">${film.title}</h3>
-            ${filmImage}
+            <img class="MoviePhotos" src="${film.imageURL}" alt="">
             <h4 class="prodYear">Rok produkcji: ${film.prodYear}</h4>
             <p class="categories">${category1}</p>
             <p class="categories">${category2}</p>
@@ -250,10 +169,124 @@ function sortCategory(data) {
             <h5 class="film-desc-title">Opis filmu:</h5>
             <p class="film-desc">${film.description}</p>
             <p class ="ratings">Oceny użytkowników: <br>
-            ${film.rating}/5</p>
-            <p class ="ratingsNum">Liczba ocen: ${film.ratingsNumber}</p>
+            ${ratingf}</p>
+            <p class ="ratingsNum">Liczba ocen: ${ratingnum}</p>
             <p class ="awards">Nagrody: ${film.awards}</p>
+            <p class = "imdbRating">Ranking IMDB: ${imdbr}</p>
+            
         `;
+        
+        
+        let filmLeft = document.createElement("div");
+        filmLeft.classList.add("film-left");
+        filmLeft.innerHTML = filmInfo;
+
+        let filmRight = document.createElement("div");
+        filmRight.classList.add("film-right");
+        filmRight.innerHTML = filmDesc;
+        
+        filmBlock.appendChild(filmLeft);
+        filmBlock.appendChild(filmRight);
+        filmContainer.appendChild(filmBlock);
+        main.appendChild(filmContainer);
+        main.appendChild(filmRating);
+        i++;
+    });
+        } 
+    
+});
+    }
+}
+function sortCategory(data) {
+    let main = document.getElementById("main");
+    main.innerHTML = "";
+    if (data.length == 0) {
+        let noResult = document.createElement("div");
+        noResult.innerHTML = "<h3>Brak wyników z tej kategorii</h3>"
+        main.appendChild(noResult);
+    }
+    else {
+        let i = 0;
+    data.forEach(film => {
+
+        let category1 = "Brak";
+        let category2 = "Brak";
+        if (film.categories.length < 2) {
+            category1 = film.categories[0].name;
+        } else {
+            category1 = film.categories[0].name;
+            category2 = film.categories[1].name;
+        }
+        let ratingf = "Brak";
+        if (film.rating != null) {
+            ratingf = film.rating + '/5';
+        }
+        let ratingnum = "Brak";
+        if (film.ratingsNumber != null) {
+            ratingnum = film.ratingsNumber;
+        }
+        let imdbr = "Brak";
+        if (film.imdbrating != null) {
+            imdbr = film.imdbrating;
+        }
+
+
+        let filmContainer = document.createElement("div");
+        filmContainer.classList.add("film-container");
+        
+        
+        let filmBlock = document.createElement("div");
+        filmBlock.classList.add("OddMovies");
+        filmBlock.style.display = "flex";
+        filmBlock.style.flexDirection = "row";
+        filmBlock.style.gap = "20px";
+
+        let filmRating = document.createElement("div");
+        filmRating.classList.add("oceny");
+        filmRating.innerHTML = `
+                <h6 class="text-center">Oceń film</h6>
+                <form action="" method="post">
+                <div class="rating" id="rating-${film.id}">
+                    <input type="radio" id="star1-${film.id}" name="rating-${film.id}" value="1">
+                    <label for="star1-${film.id}"><i class="bi bi-star-fill"></i></label>
+
+                    <input type="radio" id="star2-${film.id}" name="rating-${film.id}" value="2">
+                    <label for="star2-${film.id}"><i class="bi bi-star-fill"></i></label>
+
+                    <input type="radio" id="star3-${film.id}" name="rating-${film.id}" value="3">
+                    <label for="star3-${film.id}"><i class="bi bi-star-fill"></i></label>
+
+                    <input type="radio" id="star4-${film.id}" name="rating-${film.id}" value="4">
+                    <label for="star4-${film.id}"><i class="bi bi-star-fill"></i></label>
+
+                    <input type="radio" id="star5-${film.id}" name="rating-${film.id}" value="5">
+                    <label for="star5-${film.id}"><i class="bi bi-star-fill"></i></label>
+                </div>
+                    <button type="submit" class="btn btn-primary mt-2">Oceń</button>
+                </form>
+                <hr />
+        `
+
+        let filmInfo = `
+            <h3 class="film-title">${film.title}</h3>
+            <img class="MoviePhotos" src="${film.imageURL}" alt="">
+            <h4 class="prodYear">Rok produkcji: ${film.prodYear}</h4>
+            <p class="categories">${category1}</p>
+            <p class="categories">${category2}</p>
+        `;
+        let filmDesc = `
+            <button class="MovieControls"><i class="bi bi-trash-fill"></i></button>
+            <button class="MovieControls"><i class="bi bi-pencil-fill"></i></button>   
+            <h5 class="film-desc-title">Opis filmu:</h5>
+            <p class="film-desc">${film.description}</p>
+            <p class ="ratings">Oceny użytkowników: <br>
+            ${ratingf}</p>
+            <p class ="ratingsNum">Liczba ocen: ${ratingnum}</p>
+            <p class ="awards">Nagrody: ${film.awards}</p>
+            <p class = "imdbRating">Ranking IMDB: ${imdbr}</p>
+            
+        `;
+        
         
         let filmLeft = document.createElement("div");
         filmLeft.classList.add("film-left");
@@ -298,13 +331,26 @@ function displayFilmsInitial(data) {
             category1 = film.categories[0].name;
             category2 = film.categories[1].name;
         }
+        let ratingf = "Brak";
+        if (film.rating != null) {
+            ratingf = film.rating + '/5';
+        }
+        let ratingnum = "Brak";
+        if (film.ratingsNumber != null) {
+            ratingnum = film.ratingsNumber;
+        }
+        let imdbr = "Brak";
+        if (film.imdbrating != null) {
+            imdbr = film.imdbrating;
+        }
+
 
         let filmContainer = document.createElement("div");
         filmContainer.classList.add("film-container");
         
         
         let filmBlock = document.createElement("div");
-        filmBlock.classList.add(i % 2 != 0 ? "EvenMovies" : "OddMovies");
+        filmBlock.classList.add("OddMovies");
         filmBlock.style.display = "flex";
         filmBlock.style.flexDirection = "row";
         filmBlock.style.gap = "20px";
@@ -335,10 +381,9 @@ function displayFilmsInitial(data) {
                 <hr />
         `
 
-        let filmImage = `<img class="MoviePhotos" src="" alt="">`;
         let filmInfo = `
             <h3 class="film-title">${film.title}</h3>
-            ${filmImage}
+            <img class="MoviePhotos" src="${film.imageURL}" alt="">
             <h4 class="prodYear">Rok produkcji: ${film.prodYear}</h4>
             <p class="categories">${category1}</p>
             <p class="categories">${category2}</p>
@@ -349,12 +394,13 @@ function displayFilmsInitial(data) {
             <h5 class="film-desc-title">Opis filmu:</h5>
             <p class="film-desc">${film.description}</p>
             <p class ="ratings">Oceny użytkowników: <br>
-            ${film.rating}/5</p>
-            <p class ="ratingsNum">Liczba ocen: ${film.ratingsNumber}</p>
+            ${ratingf}</p>
+            <p class ="ratingsNum">Liczba ocen: ${ratingnum}</p>
             <p class ="awards">Nagrody: ${film.awards}</p>
-        
+            <p class = "imdbRating">Ranking IMDB: ${imdbr}</p>
             
         `;
+        
         
         let filmLeft = document.createElement("div");
         filmLeft.classList.add("film-left");

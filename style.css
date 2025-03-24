@@ -186,3 +186,10 @@ footer{
 .film-desc {
     font-weight: 600;
 }
+
+.film-left {
+    float: left;
+}
+.film-right {
+    float: right;
+}
