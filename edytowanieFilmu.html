@@ -120,13 +120,44 @@
 
     </div>
     <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const passId = window.location.search;
+            const urlParams = new URLSearchParams(passId);
+            const getId = urlParams.get('id');
+            let title = localStorage.getItem(`film-title-${getId}`);
+            document.getElementById("title").value = title;
+
+            let desc = localStorage.getItem(`film-desc-${getId}`);
+            document.getElementById("description").value = desc;
+
+            let awards = localStorage.getItem(`film-awards-${getId}`);
+            document.getElementById("awards").value = awards;
+
+            let imdb = localStorage.getItem(`film-imdb-${getId}`);
+            document.getElementById("imdbrating").value = imdb;
+
+            let year = localStorage.getItem(`film-year-${getId}`);
+            document.getElementById("prodYear").value = year;
+
+            let img = localStorage.getItem(`film-img-${getId}`);
+            document.getElementById("imageURL").value = img;
+
+            let cat1 = localStorage.getItem(`film-cat1-${getId}`);
+            document.getElementById("category1").value = cat1;
+
+            let cat2 = localStorage.getItem(`film-cat2-${getId}`);
+            document.getElementById("category2").value = cat2;
+            
+        });
         document.getElementById("editFilmForm").addEventListener("submit", async function(event){
             event.preventDefault();
             const passId = window.location.search;
             const urlParams = new URLSearchParams(passId);
             const getId = urlParams.get('id');
+            
             let formData = new FormData(this);
             formData.append("id", getId);
+            
             const apiurl = window.API_URL + 'edit';
             const request = {
                 method: 'PUT',

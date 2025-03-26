@@ -164,7 +164,7 @@ function searchForFilms(query, data) {
         `;
         let filmDesc = `
             <button class="MovieControls" id="softdel-film-${film.id}"><i class="bi bi-trash-fill"></i></button>
-            <a href ="edytowanieFilmu.html"><button class="MovieControls" id="edit-film-${film.id}"><i class="bi bi-pencil-fill"></i></button></a> 
+            <a href ="edytowanieFilmu.html?id=${film.id}"><button class="MovieControls" id="edit-film-${film.id}"><i class="bi bi-pencil-fill"></i></button></a>
             <h5 class="film-desc-title">Opis filmu:</h5>
             <p class="film-desc">${film.description}</p>
             <p class ="ratings">Oceny użytkowników: <br>
@@ -172,8 +172,33 @@ function searchForFilms(query, data) {
             <p class ="ratingsNum">Liczba ocen: ${ratingnum}</p>
             <p class ="awards">Nagrody: ${film.awards}</p>
             <p class = "imdbRating">Ranking IMDB: ${imdbr}</p>
+            <input type="hidden" name="id" id="id" value="${film.id}">
             
         `;
+        
+        const titleValue = `${film.title}`;
+        localStorage.setItem(`film-title-${film.id}`, titleValue);
+
+        const descValue = `${film.description}`;
+        localStorage.setItem(`film-desc-${film.id}`, descValue);
+
+        const awardsValue = `${film.awards}`;
+        localStorage.setItem(`film-awards-${film.id}`, awardsValue);
+
+        const imdbValue = `${film.imdbrating}`;
+        localStorage.setItem(`film-imdb-${film.id}`, imdbValue);
+
+        const yearValue = `${film.prodYear}`;
+        localStorage.setItem(`film-year-${film.id}`, yearValue);
+
+        const imgValue = `${film.imageURL}`;
+        localStorage.setItem(`film-img-${film.id}`, imgValue);
+
+        const cat1Value = `${category1}`;
+        localStorage.setItem(`film-cat1-${film.id}`, cat1Value);
+
+        const cat2Value = `${category2}`;
+        localStorage.setItem(`film-cat2-${film.id}`, cat2Value);
         
         
         let filmLeft = document.createElement("div");
@@ -275,7 +300,7 @@ function sortCategory(data) {
         `;
         let filmDesc = `
             <button class="MovieControls" id="softdel-film-${film.id}"><i class="bi bi-trash-fill"></i></button>
-            <a href ="edytowanieFilmu.html"><button class="MovieControls" id="edit-film-${film.id}"><i class="bi bi-pencil-fill"></i></button></a>
+            <a href ="edytowanieFilmu.html?id=${film.id}"><button class="MovieControls" id="edit-film-${film.id}"><i class="bi bi-pencil-fill"></i></button></a>
             <h5 class="film-desc-title">Opis filmu:</h5>
             <p class="film-desc">${film.description}</p>
             <p class ="ratings">Oceny użytkowników: <br>
@@ -283,8 +308,33 @@ function sortCategory(data) {
             <p class ="ratingsNum">Liczba ocen: ${ratingnum}</p>
             <p class ="awards">Nagrody: ${film.awards}</p>
             <p class = "imdbRating">Ranking IMDB: ${imdbr}</p>
+            <input type="hidden" name="id" id="id" value="${film.id}">
             
         `;
+        
+        const titleValue = `${film.title}`;
+        localStorage.setItem(`film-title-${film.id}`, titleValue);
+
+        const descValue = `${film.description}`;
+        localStorage.setItem(`film-desc-${film.id}`, descValue);
+
+        const awardsValue = `${film.awards}`;
+        localStorage.setItem(`film-awards-${film.id}`, awardsValue);
+
+        const imdbValue = `${film.imdbrating}`;
+        localStorage.setItem(`film-imdb-${film.id}`, imdbValue);
+
+        const yearValue = `${film.prodYear}`;
+        localStorage.setItem(`film-year-${film.id}`, yearValue);
+
+        const imgValue = `${film.imageURL}`;
+        localStorage.setItem(`film-img-${film.id}`, imgValue);
+
+        const cat1Value = `${category1}`;
+        localStorage.setItem(`film-cat1-${film.id}`, cat1Value);
+
+        const cat2Value = `${category2}`;
+        localStorage.setItem(`film-cat2-${film.id}`, cat2Value);
         
         
         let filmLeft = document.createElement("div");
@@ -401,6 +451,29 @@ function displayFilmsInitial(data) {
             
         `;
         
+        const titleValue = `${film.title}`;
+        localStorage.setItem(`film-title-${film.id}`, titleValue);
+
+        const descValue = `${film.description}`;
+        localStorage.setItem(`film-desc-${film.id}`, descValue);
+
+        const awardsValue = `${film.awards}`;
+        localStorage.setItem(`film-awards-${film.id}`, awardsValue);
+
+        const imdbValue = `${film.imdbrating}`;
+        localStorage.setItem(`film-imdb-${film.id}`, imdbValue);
+
+        const yearValue = `${film.prodYear}`;
+        localStorage.setItem(`film-year-${film.id}`, yearValue);
+
+        const imgValue = `${film.imageURL}`;
+        localStorage.setItem(`film-img-${film.id}`, imgValue);
+
+        const cat1Value = `${category1}`;
+        localStorage.setItem(`film-cat1-${film.id}`, cat1Value);
+
+        const cat2Value = `${category2}`;
+        localStorage.setItem(`film-cat2-${film.id}`, cat2Value);
         
         let filmLeft = document.createElement("div");
         filmLeft.classList.add("film-left");

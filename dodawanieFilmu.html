@@ -123,6 +123,7 @@
             event.preventDefault();
             let formData = new FormData(this);
             const apiurl = window.API_URL + 'add';
+            formData.append("active", "true");
             const request = {
                 method: 'POST',
                 headers: {
