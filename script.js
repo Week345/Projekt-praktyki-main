@@ -133,7 +133,7 @@ function searchForFilms(query, data) {
         filmRating.classList.add("oceny");
         filmRating.innerHTML = `
                 <h6 class="text-center">Oceń film</h6>
-                <form action="" method="post">
+                <form class ="rating-form" data-film-id = "${film.id}" action="" method="post">
                 <div class="rating" id="rating-${film.id}">
                     <input type="radio" id="star1-${film.id}" name="rating-${film.id}" value="1">
                     <label for="star1-${film.id}"><i class="bi bi-star-fill"></i></label>
@@ -150,12 +150,11 @@ function searchForFilms(query, data) {
                     <input type="radio" id="star5-${film.id}" name="rating-${film.id}" value="5">
                     <label for="star5-${film.id}"><i class="bi bi-star-fill"></i></label>
                 </div>
-                    <button type="submit" class="btn btn-primary mt-2">Oceń</button>
+                    <button type="submit" class="btn btn-primary mt-2" id="ratebtn">Oceń</button>
                 </form>
                 <hr />
         `
 
-        let filmImage = `<img class="MoviePhotos" src="" alt="">`;
         let filmInfo = `
             <h3 class="film-title">${film.title}</h3>
             <img class="MoviePhotos" src="${film.imageURL}" alt="">
@@ -164,8 +163,8 @@ function searchForFilms(query, data) {
             <p class="categories">${category2}</p>
         `;
         let filmDesc = `
-            <button class="MovieControls"><i class="bi bi-trash-fill"></i></button>
-            <button class="MovieControls"><i class="bi bi-pencil-fill"></i></button>   
+            <button class="MovieControls" id="softdel-film-${film.id}"><i class="bi bi-trash-fill"></i></button>
+            <a href ="edytowanieFilmu.html"><button class="MovieControls" id="edit-film-${film.id}"><i class="bi bi-pencil-fill"></i></button></a> 
             <h5 class="film-desc-title">Opis filmu:</h5>
             <p class="film-desc">${film.description}</p>
             <p class ="ratings">Oceny użytkowników: <br>
@@ -245,7 +244,7 @@ function sortCategory(data) {
         filmRating.classList.add("oceny");
         filmRating.innerHTML = `
                 <h6 class="text-center">Oceń film</h6>
-                <form action="" method="post">
+                <form class ="rating-form" data-film-id = "${film.id}" action="" method="post">
                 <div class="rating" id="rating-${film.id}">
                     <input type="radio" id="star1-${film.id}" name="rating-${film.id}" value="1">
                     <label for="star1-${film.id}"><i class="bi bi-star-fill"></i></label>
@@ -262,7 +261,7 @@ function sortCategory(data) {
                     <input type="radio" id="star5-${film.id}" name="rating-${film.id}" value="5">
                     <label for="star5-${film.id}"><i class="bi bi-star-fill"></i></label>
                 </div>
-                    <button type="submit" class="btn btn-primary mt-2">Oceń</button>
+                    <button type="submit" class="btn btn-primary mt-2" id="ratebtn">Oceń</button>
                 </form>
                 <hr />
         `
@@ -275,8 +274,8 @@ function sortCategory(data) {
             <p class="categories">${category2}</p>
         `;
         let filmDesc = `
-            <button class="MovieControls"><i class="bi bi-trash-fill"></i></button>
-            <button class="MovieControls"><i class="bi bi-pencil-fill"></i></button>   
+            <button class="MovieControls" id="softdel-film-${film.id}"><i class="bi bi-trash-fill"></i></button>
+            <a href ="edytowanieFilmu.html"><button class="MovieControls" id="edit-film-${film.id}"><i class="bi bi-pencil-fill"></i></button></a>
             <h5 class="film-desc-title">Opis filmu:</h5>
             <p class="film-desc">${film.description}</p>
             <p class ="ratings">Oceny użytkowników: <br>
@@ -359,22 +358,22 @@ function displayFilmsInitial(data) {
         filmRating.classList.add("oceny");
         filmRating.innerHTML = `
                 <h6 class="text-center">Oceń film</h6>
-                <form action="" method="post">
+                <form class ="rating-form" data-film-id = "${film.id}" method="post">
                 <div class="rating" id="rating-${film.id}">
-                    <input type="radio" id="star1-${film.id}" name="rating-${film.id}" value="1">
-                    <label for="star1-${film.id}"><i class="bi bi-star-fill"></i></label>
-
-                    <input type="radio" id="star2-${film.id}" name="rating-${film.id}" value="2">
-                    <label for="star2-${film.id}"><i class="bi bi-star-fill"></i></label>
-
-                    <input type="radio" id="star3-${film.id}" name="rating-${film.id}" value="3">
-                    <label for="star3-${film.id}"><i class="bi bi-star-fill"></i></label>
+                    <input type="radio" id="star5-${film.id}" name="rating-${film.id}" value="5">
+                    <label for="star5-${film.id}"><i class="bi bi-star-fill" id="ratebtn"></i></label>
 
                     <input type="radio" id="star4-${film.id}" name="rating-${film.id}" value="4">
                     <label for="star4-${film.id}"><i class="bi bi-star-fill"></i></label>
 
-                    <input type="radio" id="star5-${film.id}" name="rating-${film.id}" value="5">
-                    <label for="star5-${film.id}"><i class="bi bi-star-fill"></i></label>
+                    <input type="radio" id="star3-${film.id}" name="rating-${film.id}" value="3">
+                    <label for="star3-${film.id}"><i class="bi bi-star-fill"></i></label>
+
+                    <input type="radio" id="star2-${film.id}" name="rating-${film.id}" value="2">
+                    <label for="star2-${film.id}"><i class="bi bi-star-fill"></i></label>
+
+                    <input type="radio" id="star1-${film.id}" name="rating-${film.id}" value="1">
+                    <label for="star1-${film.id}"><i class="bi bi-star-fill"></i></label>
                 </div>
                     <button type="submit" class="btn btn-primary mt-2">Oceń</button>
                 </form>
@@ -389,8 +388,8 @@ function displayFilmsInitial(data) {
             <p class="categories">${category2}</p>
         `;
         let filmDesc = `
-            <button class="MovieControls"><i class="bi bi-trash-fill"></i></button>
-            <button class="MovieControls"><i class="bi bi-pencil-fill"></i></button>   
+            <button class="MovieControls" id="softdel-film-${film.id}"><i class="bi bi-trash-fill"></i></button>
+            <a href ="edytowanieFilmu.html?id=${film.id}"><button class="MovieControls" id="edit-film-${film.id}"><i class="bi bi-pencil-fill"></i></button></a>
             <h5 class="film-desc-title">Opis filmu:</h5>
             <p class="film-desc">${film.description}</p>
             <p class ="ratings">Oceny użytkowników: <br>
@@ -398,6 +397,7 @@ function displayFilmsInitial(data) {
             <p class ="ratingsNum">Liczba ocen: ${ratingnum}</p>
             <p class ="awards">Nagrody: ${film.awards}</p>
             <p class = "imdbRating">Ranking IMDB: ${imdbr}</p>
+            <input type="hidden" name="id" id="id" value="${film.id}">
             
         `;
         
@@ -416,5 +416,48 @@ function displayFilmsInitial(data) {
         main.appendChild(filmContainer);
         main.appendChild(filmRating);
         i++;
+
+        let delbtn = document.getElementById(`softdel-film-${film.id}`);
+        delbtn.addEventListener("click", function() {
+        const apiurl = window.API_URL + 'delete/' + film.id
+        const request = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+        fetch(apiurl, request)
+        .then(response => console.log(response))
+        .catch(error => console.error("Błąd z usunięciem", error));
+
+        alert("Pomyślnie usunięto film!");
+        window.location.reload();
+    });
+    });
+    document.querySelectorAll(".rating-form").forEach(form => {
+        form.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const filmId = form.dataset.filmId;
+        const rating = document.querySelector(`input[name="rating-${filmId}"]:checked`);
+            if (rating == null) {
+                alert("Proszę wybrać ocenę przed wysłaniem.");
+            }
+    
+        const apiurl = window.API_URL + `rate/${filmId}?rating=${rating.value}`; 
+        const request = {
+            method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+        }
+        fetch(apiurl, request)
+            .then(response => response.json())
+            .catch(error => console.error("Błąd z ocenieniem filmu", error));
+        
+        alert("Pomyślnie oceniono film!");
+        window.location.reload();
+        });
     });
 }
+
+
